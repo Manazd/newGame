@@ -1,7 +1,8 @@
 package com.example.game.Views;
 
 import com.example.game.Controllers.MovingController;
-import com.example.game.Controllers.ShootingController;
+import com.example.game.Controllers.ShootingBulletAnimation;
+import com.example.game.Models.Bullet;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ public class GameController implements Initializable {
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                String keyName = keyEvent.getCode().getName(); //Get Pressed Key Name!
+                String keyName = keyEvent.getCode().getName();
                 switch (keyName) {
                     case "Left":
                         MovingController.moveLeft(plane);
@@ -38,11 +39,17 @@ public class GameController implements Initializable {
                         MovingController.moveDown(plane);
                         break;
                     case "Space":
-                        ShootingController.run(plane);
+                        shoot();
                         break;
                 }
             }
         });
+    }
+
+    private void shoot() {
+        Bullet bullet = new Bullet(plane, pane);
+        ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet);
+        shooting.play();
     }
 
     @Override
