@@ -14,6 +14,7 @@ public class Bullet {
     private double X;
     private double Y;
     private ImageView imageView;
+    private static AnchorPane pane;
 
     public Bullet(ImageView plane, AnchorPane pane) {
         ImageView bulletImage = createImageView(plane, pane);
@@ -21,6 +22,15 @@ public class Bullet {
         this.Y = bulletImage.getLayoutY();
         imageView = bulletImage;
         bullets.add(this);
+        setPane(pane);
+    }
+
+    public static AnchorPane getPane() {
+        return pane;
+    }
+
+    public void setPane(AnchorPane pane) {
+        Bullet.pane = pane;
     }
 
     private ImageView createImageView(ImageView plane, AnchorPane pane) {
@@ -63,6 +73,11 @@ public class Bullet {
 
     public void setBackground(String url) {
         imageView.setImage(new ImagePattern(new Image(ShootingBulletAnimation.class.getResource(url).toExternalForm())).getImage());
+    }
+
+    public static void removeBullet(Bullet bullet) {
+        pane.getChildren().remove(bullet.getImageView());
+        bullets.remove(bullet);
     }
 }
 
