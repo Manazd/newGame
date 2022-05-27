@@ -1,6 +1,5 @@
 package com.example.game.Models;
 
-import com.example.game.Controllers.BombAnimation;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
@@ -22,7 +21,7 @@ public class MiniBoss {
 
     private ImageView createImageView(){
         ImageView imageView = new ImageView();
-        ImagePattern miniBoss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/MiniBossFly/0.png").toExternalForm()));
+        ImagePattern miniBoss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/MiniBossFly/pink/0.png").toExternalForm()));
         imageView.setImage(miniBoss.getImage());
 
         imageView.setLayoutX(695);

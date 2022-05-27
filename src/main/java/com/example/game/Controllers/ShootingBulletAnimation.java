@@ -16,13 +16,18 @@ public class ShootingBulletAnimation extends Transition {
 
     @Override
     protected void interpolate(double v) {
-        if (bullet.getImageView().getLayoutX() <= 700) {
-            bullet.getImageView().setLayoutX(bullet.getImageView().getLayoutX() + 10);
-            int frame = (int) Math.floor(v * 8);
-            bullet.setBackground("/com/example/game/img/Plane/Plane/Mini/Bullet/" + frame + ".png");
+        if (bullet.bulletHitBoss()) {
+            BulletHitBossAnimation animation = new BulletHitBossAnimation(bullet);
+            animation.play();
         }
         else {
-            Bullet.removeBullet(bullet);
+            if (bullet.getImageView().getLayoutX() <= 700) {
+                bullet.getImageView().setLayoutX(bullet.getImageView().getLayoutX() + 10);
+                int frame = (int) Math.floor(v * 8);
+                bullet.setBackground("/com/example/game/img/Plane/Plane/Mini/Bullet/" + frame + ".png");
+            } else {
+                bullet.removeBullet(bullet);
+            }
         }
     }
 }

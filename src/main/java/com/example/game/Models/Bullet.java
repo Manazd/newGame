@@ -1,5 +1,6 @@
 package com.example.game.Models;
 
+import com.example.game.Controllers.Boss;
 import com.example.game.Controllers.ShootingBulletAnimation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -75,9 +76,13 @@ public class Bullet {
         imageView.setImage(new ImagePattern(new Image(getClass().getResource(url).toExternalForm())).getImage());
     }
 
-    public static void removeBullet(Bullet bullet) {
+    public void removeBullet(Bullet bullet) {
         pane.getChildren().remove(bullet.getImageView());
         bullets.remove(bullet);
+    }
+
+    public boolean bulletHitBoss() {
+        return this.getImageView().getLayoutX() == Boss.getInstance(pane).getLayoutX();
     }
 }
 

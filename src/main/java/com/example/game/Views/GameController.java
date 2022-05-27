@@ -1,9 +1,6 @@
 package com.example.game.Views;
 
-import com.example.game.Controllers.BombAnimation;
-import com.example.game.Controllers.MiniBossAnimation;
-import com.example.game.Controllers.MovingController;
-import com.example.game.Controllers.ShootingBulletAnimation;
+import com.example.game.Controllers.*;
 import com.example.game.Models.Bomb;
 import com.example.game.Models.Bullet;
 import com.example.game.Models.MiniBoss;
@@ -14,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +40,7 @@ public class GameController implements Initializable {
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                checkTime();
                 switch (keyEvent.getCode()) {
                     case LEFT:
                         MovingController.moveLeft(plane);
@@ -77,10 +76,16 @@ public class GameController implements Initializable {
         Bullet bullet = new Bullet(plane, pane);
         ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet);
         shooting.play();
+//        AudioClip shoot = new AudioClip(Sound.class.getResource("/com/example/game/Audio/gunShoot.mp3").toExternalForm());
+//        shoot.play();
+//        Sound.shootBullet();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        BossAnimation bossAnimation = new BossAnimation(Boss.getInstance(pane));
+        bossAnimation.play();
+
         timer.scheduleAtFixedRate(task, 1000, 1000);
         Platform.runLater(new Runnable() {
             @Override
@@ -93,10 +98,16 @@ public class GameController implements Initializable {
     }
 
     private void checkTime() {
-        if (second % 2 == 0) {
-            MiniBoss miniBoss = new MiniBoss(pane);
-            MiniBossAnimation miniBossAnimation = new MiniBossAnimation(miniBoss);
-            miniBossAnimation.play();
+        if (second % 50 == 0) {
+            createMiniBoss();
+        } else if (second % 100 == 0) {
+            createMiniBoss();
         }
+    }
+
+    private void createMiniBoss() {
+        MiniBoss miniBoss = new MiniBoss(pane);
+        MiniBossAnimation miniBossAnimation = new MiniBossAnimation(miniBoss);
+        miniBossAnimation.play();
     }
 }
