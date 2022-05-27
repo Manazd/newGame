@@ -1,10 +1,12 @@
 package com.example.game.Views;
 
 import com.example.game.Controllers.BombAnimation;
+import com.example.game.Controllers.MiniBossAnimation;
 import com.example.game.Controllers.MovingController;
 import com.example.game.Controllers.ShootingBulletAnimation;
 import com.example.game.Models.Bomb;
 import com.example.game.Models.Bullet;
+import com.example.game.Models.MiniBoss;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,12 +17,26 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameController implements Initializable {
 
     public AnchorPane pane;
     @FXML
     private ImageView plane;
+    public static int second = 0;
+
+    public Timer timer = new Timer();
+    public TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            second++;
+            System.out.println(second);
+//            timer.cancel();
+//            timer.purge();
+        }
+    };
 
     private void run() {
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -65,20 +81,22 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        timer.scheduleAtFixedRate(task, 1000, 1000);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 pane.requestFocus();
             }
         });
+        checkTime();
         run();
-//        Image image = new Image("/com/example/game/img/Plane/Plane/mugman_plane_idle_straight_0004.png");
-//        ImageView view = new ImageView();
-//        Main.move();
-//        TranslateTransition translate = new TranslateTransition();
-//        translate.setNode(firstPlane);
-//        translate.setDuration(Duration.millis(1000));
-//        translate.setByX(250);
-//        translate.play();
+    }
+
+    private void checkTime() {
+        if (second % 2 == 0) {
+            MiniBoss miniBoss = new MiniBoss(pane);
+            MiniBossAnimation miniBossAnimation = new MiniBossAnimation(miniBoss);
+            miniBossAnimation.play();
+        }
     }
 }

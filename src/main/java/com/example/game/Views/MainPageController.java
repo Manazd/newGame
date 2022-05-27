@@ -21,6 +21,7 @@ public class MainPageController {
     private Button profile;
     @FXML
     private Button setting;
+    public static boolean windowIsClosed = false;
 
     public void showProfile(ActionEvent actionEvent) throws IOException {
         Main.changeScene("newProfilePage");
@@ -36,10 +37,15 @@ public class MainPageController {
 
     public void exit(ActionEvent actionEvent) {
         UserController.saveUsers();
+        windowIsClosed = true;
         Main.closeWindow();
     }
 
     public void showSetting(ActionEvent actionEvent) throws IOException {
         Main.changeScene("settingPage");
+    }
+
+    public static boolean windowIsClosed() {
+        return windowIsClosed;
     }
 }

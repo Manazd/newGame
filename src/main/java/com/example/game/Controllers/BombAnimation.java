@@ -2,13 +2,11 @@ package com.example.game.Controllers;
 
 import com.example.game.Models.Bomb;
 import javafx.animation.Transition;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class BombAnimation extends Transition {
 
     private Bomb bomb;
-    private int speed = 3;
 
     public BombAnimation(Bomb bomb) {
         this.bomb = bomb;

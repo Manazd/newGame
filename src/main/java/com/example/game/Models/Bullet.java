@@ -35,7 +35,7 @@ public class Bullet {
 
     private ImageView createImageView(ImageView plane, AnchorPane pane) {
         ImageView imageView = new ImageView();
-        ImagePattern bullet = new ImagePattern(new Image(ShootingBulletAnimation.class.getResource("/com/example/game/img/Plane/Plane/Mini/Bullet/0.png").toExternalForm()));
+        ImagePattern bullet = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/Plane/Plane/Mini/Bullet/0.png").toExternalForm()));
         imageView.setImage(bullet.getImage());
 
         imageView.setLayoutX(plane.getLayoutX() + 50);
@@ -72,7 +72,7 @@ public class Bullet {
     }
 
     public void setBackground(String url) {
-        imageView.setImage(new ImagePattern(new Image(ShootingBulletAnimation.class.getResource(url).toExternalForm())).getImage());
+        imageView.setImage(new ImagePattern(new Image(getClass().getResource(url).toExternalForm())).getImage());
     }
 
     public static void removeBullet(Bullet bullet) {

@@ -32,7 +32,7 @@ public class Bomb {
 
     private ImageView createImageView(AnchorPane pane, ImageView plane) {
         ImageView imageView = new ImageView();
-        ImagePattern bomb = new ImagePattern(new Image(ShootingBulletAnimation.class.getResource("/com/example/game/img/Plane/Plane/Mini/Super/bomb/0.png").toExternalForm()));
+        ImagePattern bomb = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/Plane/Plane/Mini/Super/bomb/0.png").toExternalForm()));
         imageView.setImage(bomb.getImage());
 
         imageView.setLayoutX(plane.getLayoutX() + 50);
@@ -69,7 +69,7 @@ public class Bomb {
     }
 
     public void setBackground(String url) {
-        imageView.setImage(new ImagePattern(new Image(BombAnimation.class.getResource(url).toExternalForm())).getImage());
+        imageView.setImage(new ImagePattern(new Image(getClass().getResource(url).toExternalForm())).getImage());
     }
 
     public static void removeBomb(Bomb bomb) {
