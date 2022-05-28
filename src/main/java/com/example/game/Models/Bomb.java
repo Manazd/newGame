@@ -1,7 +1,11 @@
 package com.example.game.Models;
 
 import com.example.game.Controllers.BombAnimation;
+import com.example.game.Controllers.BombHitBossAnimation;
+import com.example.game.Controllers.BulletHitBossAnimation;
 import com.example.game.Controllers.ShootingBulletAnimation;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -60,6 +64,10 @@ public class Bomb {
         return Y;
     }
 
+    public double getLayoutX() {
+        return X;
+    }
+
     public void setY(double y) {
         Y = y;
     }
@@ -73,7 +81,24 @@ public class Bomb {
     }
 
     public static void removeBomb(Bomb bomb) {
-        pane.getChildren().remove(bomb.getImageView());
+//        pane.getChildren().remove(bomb.getImageView());
         bombs.remove(bomb);
+    }
+
+    public boolean bombHitBoss() {
+        return this.getImageView().getLayoutX() >= Boss.getInstance(pane).getLayoutX() - 40
+                && this.getImageView().getLayoutY() >= Boss.getInstance(pane).getLayoutY()
+                && this.getImageView().getLayoutY() <= Boss.getInstance(pane).getLayoutY() + 140;
+    }
+
+    public void explode() {
+        BombHitBossAnimation animation = new BombHitBossAnimation(this, pane);
+        animation.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                pane.getChildren().remove(Bomb.this.getImageView());
+            }
+        });
+        animation.play();
     }
 }

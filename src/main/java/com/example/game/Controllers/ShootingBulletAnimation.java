@@ -25,12 +25,9 @@ public class ShootingBulletAnimation extends Transition {
         if (bullet.bulletHitBoss()) {
             Boss boss = Boss.getInstance(pane);
             boss.setLives(boss.getLives() - 1);
-            GameController.setBossLives(null);
-            GameController.setBossLives(Integer.toString(boss.getLives()));
+//            GameController.setBossLives(Integer.toString(boss.getLives()));
             this.stop();
-
             bullet.explode();
-
             bullet.removeBullet(bullet);
         }
         else {
@@ -39,7 +36,7 @@ public class ShootingBulletAnimation extends Transition {
                 int frame = (int) Math.floor(v * 8);
                 bullet.setBackground("/com/example/game/img/Plane/Plane/Mini/Bullet/" + frame + ".png");
             } else {
-                bullet.removeBullet(bullet);
+                pane.getChildren().remove(bullet.getImageView());
             }
         }
     }

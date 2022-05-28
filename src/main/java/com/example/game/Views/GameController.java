@@ -22,7 +22,7 @@ public class GameController implements Initializable {
 
     public AnchorPane pane;
     @FXML
-    private static Text bossLives;
+    private Text bossLives;
     @FXML
     private ImageView plane;
     public static int second = 0;
@@ -63,15 +63,25 @@ public class GameController implements Initializable {
                     case ENTER:
                         transformToBomb();
                         break;
+                    case W:
+                        bossShoot();
+                        break;
                 }
             }
         });
     }
 
+    private void bossShoot() {
+        pane.getChildren().remove(Boss.getInstance(pane).getImageView());
+        BossShootAnimation animation = new BossShootAnimation(pane);
+        animation.play();
+//        pane.getChildren().add(Boss.getInstance(pane).getImageView());
+    }
+
     private void transformToBomb() {
         pane.getChildren().remove(plane);
         Bomb bomb = new Bomb(plane, pane);
-        BombAnimation bombAnimation = new BombAnimation(bomb);
+        BombAnimation bombAnimation = new BombAnimation(bomb, pane);
         bombAnimation.play();
     }
 
@@ -88,7 +98,6 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         BossAnimation bossAnimation = new BossAnimation(Boss.getInstance(pane));
         bossAnimation.play();
-        bossLives = new Text();
         bossLives.setText("58");
 //        timer.sc heduleAtFixedRate(task, 1000, 1000);
         Platform.runLater(new Runnable() {
@@ -109,11 +118,8 @@ public class GameController implements Initializable {
         }
     }
 
-    public Text getBossLives() {
-        return this.bossLives;
-    }
-
-    public static void setBossLives(String lives) {
+    public void setBossLives(String lives) {
+        bossLives.setText(null);
         bossLives.setText(lives);
     }
 }

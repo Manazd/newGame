@@ -78,7 +78,6 @@ public class Bullet {
     }
 
     public void removeBullet(Bullet bullet) {
-        pane.getChildren().remove(bullet.getImageView());
         bullets.remove(bullet);
     }
 

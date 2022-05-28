@@ -57,4 +57,8 @@ public class Boss {
     public void setLives(int lives) {
         this.lives = lives;
     }
+
+    public ImageView getImageView() {
+        return this.imageView;
+    }
 }
