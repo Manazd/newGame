@@ -12,19 +12,40 @@ public class MiniBoss {
     private static ArrayList<MiniBoss> miniBosses = new ArrayList<>();
     private static AnchorPane pane;
     private ImageView imageView;
+    private boolean isPink;
 
-    public MiniBoss(AnchorPane anchorPane) {
+    public MiniBoss(AnchorPane anchorPane, int counter) {
         pane = anchorPane;
-        this.imageView = createImageView();
+        this.imageView = createImageView(counter);
         miniBosses.add(this);
     }
 
-    private ImageView createImageView(){
+    private ImageView createImageView(int counter){
         ImageView imageView = new ImageView();
-        ImagePattern miniBoss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/MiniBossFly/pink/0.png").toExternalForm()));
-        imageView.setImage(miniBoss.getImage());
+        if (counter == 0) {
+            ImagePattern miniBoss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/MiniBossFly/pink/0.png").toExternalForm()));
+            imageView.setImage(miniBoss.getImage());
+            imageView.setLayoutX(695);
+            isPink = true;
+        }
+        else if (counter == 1) {
+            ImagePattern miniBoss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/MiniBossFly/pink/0.png").toExternalForm()));
+            imageView.setImage(miniBoss.getImage());
+            imageView.setLayoutX(630);
+            isPink = true;
+        }
+        else if (counter == 2) {
+            ImagePattern miniBoss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/MiniBossFly/yellow/0.png").toExternalForm()));
+            imageView.setImage(miniBoss.getImage());
+            imageView.setLayoutX(565);
+        }
+        else if (counter == 3) {
+            ImagePattern miniBoss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/MiniBossFly/yellow/0.png").toExternalForm()));
+            imageView.setImage(miniBoss.getImage());
+            imageView.setLayoutX(500);
+        }
 
-        imageView.setLayoutX(695);
+
         imageView.setLayoutY(300);
 
         pane.getChildren().add(imageView);
@@ -44,5 +65,9 @@ public class MiniBoss {
     public void removeMiniBoss(MiniBoss miniBoss) {
         pane.getChildren().remove(miniBoss.getImageView());
         miniBosses.remove(miniBoss);
+    }
+
+    public boolean isPink() {
+        return isPink;
     }
 }

@@ -2,6 +2,7 @@ package com.example.game.Views;
 
 import com.example.game.Controllers.*;
 import com.example.game.Models.Bomb;
+import com.example.game.Models.Boss;
 import com.example.game.Models.Bullet;
 import com.example.game.Models.MiniBoss;
 import javafx.application.Platform;
@@ -12,35 +13,37 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Text;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class GameController implements Initializable {
 
     public AnchorPane pane;
     @FXML
+    private static Text bossLives;
+    @FXML
     private ImageView plane;
     public static int second = 0;
 
-    public Timer timer = new Timer();
-    public TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            second++;
-            System.out.println(second);
-//            timer.cancel();
-//            timer.purge();
-        }
-    };
+//    public Timer timer = new Timer();
+//    public TimerTask task = new TimerTask() {
+//        @Override
+//        public void run() {
+//            second++;
+//            System.out.println(second);
+////            if (second % 10 == 0)
+////                createMiniBoss();
+////            timer.cancel();
+////            timer.purge();
+//        }
+//    };
 
     private void run() {
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                checkTime();
                 switch (keyEvent.getCode()) {
                     case LEFT:
                         MovingController.moveLeft(plane);
@@ -74,40 +77,43 @@ public class GameController implements Initializable {
 
     private void shootBullet() {
         Bullet bullet = new Bullet(plane, pane);
-        ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet);
+        ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet, pane);
         shooting.play();
-//        AudioClip shoot = new AudioClip(Sound.class.getResource("/com/example/game/Audio/gunShoot.mp3").toExternalForm());
-//        shoot.play();
-//        Sound.shootBullet();
+        AudioClip shoot = new AudioClip(this.getClass().getResource("/com/example/game/Audio/gunShoot.mp3").toExternalForm());
+        shoot.play();
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         BossAnimation bossAnimation = new BossAnimation(Boss.getInstance(pane));
         bossAnimation.play();
-
-        timer.scheduleAtFixedRate(task, 1000, 1000);
+        bossLives = new Text();
+        bossLives.setText("58");
+//        timer.sc heduleAtFixedRate(task, 1000, 1000);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 pane.requestFocus();
             }
         });
-        checkTime();
+        createMiniBoss();
         run();
     }
 
-    private void checkTime() {
-        if (second % 50 == 0) {
-            createMiniBoss();
-        } else if (second % 100 == 0) {
-            createMiniBoss();
+    private void createMiniBoss() {
+        for (int i = 0; i < 4; i++) {
+            MiniBoss miniBoss = new MiniBoss(pane, i);
+            MiniBossAnimation miniBossAnimation = new MiniBossAnimation(miniBoss);
+            miniBossAnimation.play();
         }
     }
 
-    private void createMiniBoss() {
-        MiniBoss miniBoss = new MiniBoss(pane);
-        MiniBossAnimation miniBossAnimation = new MiniBossAnimation(miniBoss);
-        miniBossAnimation.play();
+    public Text getBossLives() {
+        return this.bossLives;
+    }
+
+    public static void setBossLives(String lives) {
+        bossLives.setText(lives);
     }
 }

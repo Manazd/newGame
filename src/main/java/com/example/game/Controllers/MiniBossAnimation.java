@@ -17,7 +17,10 @@ public class MiniBossAnimation extends Transition {
         if (miniBoss.getImageView().getLayoutX() >= 0) {
             miniBoss.getImageView().setLayoutX(miniBoss.getImageView().getLayoutX() - 5);
             int frame = (int) Math.floor(v * 3);
-            miniBoss.setBackground("/com/example/game/img/MiniBossFly/pink/" + frame + ".png");
+            if (miniBoss.isPink())
+                miniBoss.setBackground("/com/example/game/img/MiniBossFly/pink/" + frame + ".png");
+            else
+                miniBoss.setBackground("/com/example/game/img/MiniBossFly/yellow/" + frame + ".png");
         }
         else {
             miniBoss.removeMiniBoss(miniBoss);

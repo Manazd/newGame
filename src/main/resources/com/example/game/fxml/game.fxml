@@ -3,6 +3,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="pane" prefHeight="480.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.Views.GameController">
    <children>
@@ -21,5 +23,15 @@
             <Image url="@../img/Plane/Plane/Idle/mugman_plane_idle_straight_0001.png" />
          </image>
       </ImageView>
+      <Text layoutX="568.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Boss lives : " textAlignment="CENTER" wrappingWidth="86.5115966796875">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="bossLives" layoutX="655.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

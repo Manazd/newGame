@@ -1,5 +1,6 @@
 package com.example.game.Controllers;
 
+import com.example.game.Models.Boss;
 import javafx.animation.Transition;
 import javafx.util.Duration;
 

@@ -1,7 +1,8 @@
 package com.example.game.Models;
 
-import com.example.game.Controllers.Boss;
-import com.example.game.Controllers.ShootingBulletAnimation;
+import com.example.game.Controllers.BulletHitBossAnimation;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -82,7 +83,20 @@ public class Bullet {
     }
 
     public boolean bulletHitBoss() {
-        return this.getImageView().getLayoutX() == Boss.getInstance(pane).getLayoutX();
+        return this.getImageView().getLayoutX() >= Boss.getInstance(pane).getLayoutX() - 40
+                && this.getImageView().getLayoutY() >= Boss.getInstance(pane).getLayoutY()
+                && this.getImageView().getLayoutY() <= Boss.getInstance(pane).getLayoutY() + 140;
+    }
+
+    public void explode() {
+        BulletHitBossAnimation animation = new BulletHitBossAnimation(this, pane);
+        animation.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                pane.getChildren().remove(Bullet.this.getImageView());
+            }
+        });
+        animation.play();
     }
 }
 

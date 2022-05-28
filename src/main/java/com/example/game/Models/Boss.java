@@ -1,4 +1,4 @@
-package com.example.game.Controllers;
+package com.example.game.Models;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,11 +12,12 @@ public class Boss {
     private static AnchorPane pane;
     private double X;
     private double Y;
+    private int lives = 50;
 
     public static Boss getInstance(AnchorPane pane) {
         if (bossInstance == null) {
             bossInstance = new Boss(pane);
-//            return bossInstance;
+            return bossInstance;
         }
         return bossInstance;
     }
@@ -47,5 +48,13 @@ public class Boss {
 
     public double getLayoutY() {
         return Y;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }
