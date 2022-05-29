@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="480.0" prefWidth="820.0" style="-fx-background-color: #D268F7;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.Views.HelpMenuController">
+   <children>
+      <Text layoutX="58.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plane:" wrappingWidth="136.5367431640625">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="58.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEFT : go to left" wrappingWidth="136.5367431640625">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="58.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RIGHT : go to right" wrappingWidth="200.5367431640625">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="58.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UP : go up" wrappingWidth="136.5367431640625">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="56.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOWN : go down" wrappingWidth="160.5367431640625">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="58.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPACE : shoot bullet" wrappingWidth="178.936767578125">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="56.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter : transform to bomb" wrappingWidth="266.936767578125">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="485.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Boss:" wrappingWidth="136.5367431640625">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="485.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A : shoot egg" wrappingWidth="136.5367431640625">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <Text layoutX="485.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="W : boss shoot" wrappingWidth="136.5367431640625">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="129.0" fitWidth="137.0" layoutX="68.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Plane/Plane/Idle/mugman_plane_idle_straight_0001.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="463.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/BossFly/0.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="back" layoutX="718.0" layoutY="401.0" mnemonicParsing="false" onAction="#goBack" text="Back">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -28,7 +29,8 @@ public class MainPageController {
     }
 
     public void newGame(ActionEvent actionEvent) throws IOException {
-        Main.changeScene("newGame");
+        Main.stopMusic();
+        Main.changeScene("game");
     }
 
     public void showScores(ActionEvent actionEvent) throws IOException {
@@ -42,7 +44,7 @@ public class MainPageController {
     }
 
     public void showSetting(ActionEvent actionEvent) throws IOException {
-        Main.changeScene("settingPage");
+        Main.changeScene("newSettingPage");
     }
 
     public static boolean windowIsClosed() {

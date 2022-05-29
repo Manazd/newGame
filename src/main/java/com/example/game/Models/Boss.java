@@ -1,5 +1,8 @@
 package com.example.game.Models;
 
+import com.example.game.Controllers.BossShootAnimation;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -60,5 +63,16 @@ public class Boss {
 
     public ImageView getImageView() {
         return this.imageView;
+    }
+
+    public void shoot(AnchorPane pane) {
+        BossShootAnimation animation = new BossShootAnimation(pane);
+        animation.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                pane.getChildren().remove(Boss.this.getImageView());
+            }
+        });
+        animation.play();
     }
 }

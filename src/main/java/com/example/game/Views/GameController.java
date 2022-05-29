@@ -1,31 +1,53 @@
 package com.example.game.Views;
 
 import com.example.game.Controllers.*;
-import com.example.game.Models.Bomb;
-import com.example.game.Models.Boss;
-import com.example.game.Models.Bullet;
-import com.example.game.Models.MiniBoss;
+import com.example.game.Main;
+import com.example.game.Models.*;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 
 
+import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 public class GameController implements Initializable {
 
     public AnchorPane pane;
     @FXML
+    private Button pause;
+    @FXML
     private Text bossLives;
     @FXML
     private ImageView plane;
+
+    private ImageView boss;
+    private static Media media;
+    private static MediaPlayer player;
+    private static MediaView mediaView;
+    private static boolean musicStop;
     public static int second = 0;
+
+    public static boolean isMusicStop() {
+        return musicStop;
+    }
+
+    public static void setMusicStop(boolean musicStop) {
+        GameController.musicStop = musicStop;
+    }
+
 
 //    public Timer timer = new Timer();
 //    public TimerTask task = new TimerTask() {
@@ -66,15 +88,24 @@ public class GameController implements Initializable {
                     case W:
                         bossShoot();
                         break;
+                    case A:
+                        makeEgg();
+                        break;
                 }
             }
         });
     }
 
+    private void makeEgg() {
+        Egg egg = new Egg(pane, 560, 140, plane);
+        EggAnimation animation = new EggAnimation(pane, egg);
+        animation.play();
+
+    }
+
     private void bossShoot() {
         pane.getChildren().remove(Boss.getInstance(pane).getImageView());
-        BossShootAnimation animation = new BossShootAnimation(pane);
-        animation.play();
+        Boss.getInstance(pane).shoot(pane);
 //        pane.getChildren().add(Boss.getInstance(pane).getImageView());
     }
 
@@ -96,8 +127,16 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!musicStop) {
+            media = new Media(getClass().getResource("/com/example/game/Audio/gameMusic.mp3").toExternalForm());
+            player = new MediaPlayer(media);
+            mediaView = new MediaView(player);
+            player.play();
+        }
+
         BossAnimation bossAnimation = new BossAnimation(Boss.getInstance(pane));
         bossAnimation.play();
+
         bossLives.setText("58");
 //        timer.sc heduleAtFixedRate(task, 1000, 1000);
         Platform.runLater(new Runnable() {
@@ -121,5 +160,17 @@ public class GameController implements Initializable {
     public void setBossLives(String lives) {
         bossLives.setText(null);
         bossLives.setText(lives);
+    }
+
+    public void pauseGame(ActionEvent actionEvent) throws IOException {
+        Main.changeScene("pauseMenu");
+    }
+
+    public static void stopMusic() {
+        player.stop();
+    }
+
+    public static void playMusic() {
+        player.play();
     }
 }

@@ -5,7 +5,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="480.0" prefWidth="820.0" style="-fx-background-color: #FD9543;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.game.Views.SettingController">
    <children>
       <Text fill="#69350d" layoutX="257.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Setting" textAlignment="CENTER" wrappingWidth="306.1367492675781">
@@ -16,6 +15,21 @@
       <Button fx:id="back" layoutX="23.0" layoutY="414.0" mnemonicParsing="false" onAction="#goBack" prefHeight="34.0" prefWidth="106.0" text="Back">
          <font>
             <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="pause" layoutX="149.0" layoutY="123.0" mnemonicParsing="false" onAction="#pauseMusic" prefHeight="36.0" prefWidth="82.0" text="pause">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Text layoutX="42.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Music:">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Text>
+      <Button fx:id="play" layoutX="257.0" layoutY="123.0" mnemonicParsing="false" onAction="#playMusic" prefHeight="36.0" prefWidth="82.0" text="play">
+         <font>
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
    </children>

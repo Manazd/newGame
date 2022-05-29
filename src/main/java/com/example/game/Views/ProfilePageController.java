@@ -134,16 +134,10 @@ public class ProfilePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         name.setText(UserController.getLoggedInUser().getUsername());
         ImagePattern Boss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/avatars/" + UserController.getLoggedInUser().getAvatarNumber() + ".png").toExternalForm()));
-//        Image image = new Image("/com/example/game/img/avatars/" + UserController.getLoggedInUser().getAvatarNumber() + ".png");
         this.imageView.setImage(Boss.getImage());
-
-
-
-//        Image image = new Image(UserController.getLoggedInUser().getAvatarURL().toExternalForm());
-//        this.imageView.setImage(image);
-//        this.imageView.setImage(UserController.getLoggedInUser().getAvatar());
     }
 
     public void showAvatars(ActionEvent actionEvent) {

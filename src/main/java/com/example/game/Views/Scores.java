@@ -67,7 +67,7 @@ public class Scores implements Initializable {
     }
 
     public void goBack(ActionEvent actionEvent) throws IOException {
-        Main.changeScene("mainPage");
+        Main.changeScene("newMainPage");
     }
 }
 
