@@ -12,6 +12,9 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class MainPageController {
+
+    @FXML
+    private Button back;
     @FXML
     private Button newGame;
     @FXML
@@ -49,5 +52,9 @@ public class MainPageController {
 
     public static boolean windowIsClosed() {
         return windowIsClosed;
+    }
+
+    public void goBack(ActionEvent actionEvent) throws IOException {
+        Main.changeScene("newLoginPage");
     }
 }

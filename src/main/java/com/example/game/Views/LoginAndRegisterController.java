@@ -79,7 +79,8 @@ public class LoginAndRegisterController {
         hasError = false;
     }
 
-    public void playAsGuest(ActionEvent actionEvent) {
-
+    public void playAsGuest(ActionEvent actionEvent) throws IOException {
+        Main.stopMusic();
+        Main.changeScene("game");
     }
 }

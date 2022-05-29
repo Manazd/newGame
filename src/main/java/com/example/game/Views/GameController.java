@@ -17,25 +17,36 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameController implements Initializable {
 
     public AnchorPane pane;
     @FXML
-    private Button pause;
+    private Button musicOff;
+    @FXML
+    private Button musicOn;
+    @FXML
+    private Text playerLives;
     @FXML
     private Text bossLives;
     @FXML
+    private Button pause;
+    @FXML
     private ImageView plane;
 
+    private User player;
+    private int levelOfGame;
     private ImageView boss;
     private static Media media;
-    private static MediaPlayer player;
+    private static MediaPlayer mediaPlayer;
     private static MediaView mediaView;
     private static boolean musicStop;
     public static int second = 0;
@@ -55,10 +66,10 @@ public class GameController implements Initializable {
 //        public void run() {
 //            second++;
 //            System.out.println(second);
-////            if (second % 10 == 0)
-////                createMiniBoss();
-////            timer.cancel();
-////            timer.purge();
+//            if (second % 10 == 0)
+//                createMiniBoss();
+//            timer.cancel();
+//            timer.purge();
 //        }
 //    };
 
@@ -118,7 +129,7 @@ public class GameController implements Initializable {
 
     private void shootBullet() {
         Bullet bullet = new Bullet(plane, pane);
-        ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet, pane);
+        ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet, pane, bossLives, playerLives);
         shooting.play();
         AudioClip shoot = new AudioClip(this.getClass().getResource("/com/example/game/Audio/gunShoot.mp3").toExternalForm());
         shoot.play();
@@ -127,26 +138,50 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Boss.getInstance(pane).getImageView().setVisible(true);
+        handleLives();
         if (!musicStop) {
-            media = new Media(getClass().getResource("/com/example/game/Audio/gameMusic.mp3").toExternalForm());
-            player = new MediaPlayer(media);
-            mediaView = new MediaView(player);
-            player.play();
+            handleMusic();
         }
+
+//        timer.scheduleAtFixedRate(task, 1000, 1000);
 
         BossAnimation bossAnimation = new BossAnimation(Boss.getInstance(pane));
         bossAnimation.play();
-
-        bossLives.setText("58");
-//        timer.sc heduleAtFixedRate(task, 1000, 1000);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 pane.requestFocus();
+                createMiniBoss();
             }
         });
-        createMiniBoss();
+//        createMiniBoss();
         run();
+        this.levelOfGame = 2;
+    }
+
+    private void handleLives() {
+        if (UserController.getLoggedInUser() != null) {
+            this.player = UserController.getLoggedInUser();
+            this.playerLives.setText(Integer.toString(player.getGameLevel().getPrimaryLives()));
+        }
+        else
+            this.playerLives.setText("5");
+        Boss.getInstance(pane).setLives(15);
+        this.bossLives.setText("15");
+    }
+
+    private void handleMusic() {
+        media = new Media(getClass().getResource("/com/example/game/Audio/gameMusic.mp3").toExternalForm());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(Duration.ZERO);
+            }
+        });
+        mediaView = new MediaView(mediaPlayer);
+        mediaPlayer.play();
     }
 
     private void createMiniBoss() {
@@ -167,10 +202,18 @@ public class GameController implements Initializable {
     }
 
     public static void stopMusic() {
-        player.stop();
+        mediaPlayer.stop();
     }
 
     public static void playMusic() {
-        player.play();
+        mediaPlayer.play();
+    }
+
+    public void stopMusic(ActionEvent actionEvent) {
+        mediaPlayer.stop();
+    }
+
+    public void playMusic(ActionEvent actionEvent) {
+        mediaPlayer.play();
     }
 }

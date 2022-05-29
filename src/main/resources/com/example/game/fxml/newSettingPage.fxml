@@ -32,5 +32,25 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
+      <Text layoutX="14.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game levels:">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Text>
+      <Button fx:id="medium" layoutX="329.0" layoutY="228.0" mnemonicParsing="false" onAction="#setMedium" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: #FFF14A;" text="medium">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="hard" layoutX="446.0" layoutY="228.0" mnemonicParsing="false" onAction="#setHard" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: #F64814;" text="hard">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="easy" layoutX="200.0" layoutY="228.0" mnemonicParsing="false" onAction="#setEasy" prefHeight="37.0" prefWidth="90.0" style="-fx-background-color: #6FF768;" text="easy">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

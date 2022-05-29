@@ -9,6 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +31,12 @@ public class Main extends Application {
 
         media = new Media(getClass().getResource("/com/example/game/Audio/menuMusic.mp3").toExternalForm());
         player = new MediaPlayer(media);
+        player.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                player.seek(Duration.ZERO);
+            }
+        });
         mediaView = new MediaView(player);
         mainStage = stage;
         mainStage.setResizable(false);

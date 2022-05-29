@@ -2,6 +2,8 @@ package com.example.game.Controllers;
 
 import com.example.game.Models.Boss;
 import com.example.game.Models.Bullet;
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -28,39 +30,15 @@ public class BulletHitBossAnimation extends Transition {
     }
 
     @Override protected void interpolate(double v) {
+        FadeTransition fade = new FadeTransition(Duration.millis(1000), Boss.getInstance(pane).getImageView());
+        fade.setFromValue(1.0);
+        fade.setToValue(0.1);
+        fade.setCycleCount(Timeline.INDEFINITE);
+        fade.setAutoReverse(true);
+        fade.play();
+
         int frame = (int) Math.floor(v * 6);
         ImagePattern dust = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/Flap Feather Dust/" + frame + ".png").toExternalForm()));
         bullet.getImageView().setImage(dust.getImage());
     }
 }
-
-
-
-
-//public class BulletHitBossAnimation extends Transition {
-//
-//    private Bullet bullet;
-//    private ImageView imageView;
-//    private AnchorPane pane;
-//
-//    public BulletHitBossAnimation(Bullet bullet, AnchorPane pane) {
-//        this.bullet = bullet;
-//        this.pane = pane;
-//        ImageView imageView = new ImageView();
-//
-//        imageView.setLayoutX(Boss.getInstance(pane).getLayoutX() + 20);
-//        imageView.setLayoutY(Boss.getInstance(pane).getLayoutY() + 35);
-//        this.imageView = imageView;
-//        pane.getChildren().add(imageView);
-//
-//        setCycleDuration(Duration.millis(500));
-//        this.setCycleCount(1);
-//    }
-//
-//    @Override
-//    protected void interpolate(double v) {
-//        int frame = (int) Math.floor(v * 6);
-//        ImagePattern dust = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/Flap Feather Dust/" + frame + ".png").toExternalForm()));
-//        imageView.setImage(dust.getImage());
-//    }
-//}

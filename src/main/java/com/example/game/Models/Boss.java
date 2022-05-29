@@ -16,16 +16,19 @@ public class Boss {
     private double X;
     private double Y;
     private int lives = 50;
+    private boolean hasBoss = true;
 
     public static Boss getInstance(AnchorPane pane) {
         if (bossInstance == null) {
             bossInstance = new Boss(pane);
             return bossInstance;
         }
+        bossInstance.getImageView().setVisible(true);
         return bossInstance;
     }
 
     private Boss(AnchorPane pane) {
+        this.hasBoss = false;
         ImageView imageView = new ImageView();
         ImagePattern boss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/BossFly/0.png").toExternalForm()));
         imageView.setImage(boss.getImage());
@@ -74,5 +77,13 @@ public class Boss {
             }
         });
         animation.play();
+    }
+
+    public boolean isHasBoss() {
+        return hasBoss;
+    }
+
+    public void setHasBoss(boolean hasBoss) {
+        this.hasBoss = hasBoss;
     }
 }

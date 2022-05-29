@@ -7,14 +7,19 @@ import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class ShootingBulletAnimation extends Transition {
     private Bullet bullet;
     private AnchorPane pane;
+    private Text bossLives;
+    private Text playerLives;
 
-    public ShootingBulletAnimation(Bullet bullet, AnchorPane pane) {
+    public ShootingBulletAnimation(Bullet bullet, AnchorPane pane, Text bossLives, Text playerLives) {
         this.bullet = bullet;
+        this.bossLives = bossLives;
+        this.playerLives = playerLives;
         this.setCycleDuration(Duration.millis(1800));
         this.setCycleCount(-1);
         this.pane = pane;
@@ -25,7 +30,7 @@ public class ShootingBulletAnimation extends Transition {
         if (bullet.bulletHitBoss()) {
             Boss boss = Boss.getInstance(pane);
             boss.setLives(boss.getLives() - 1);
-//            GameController.setBossLives(Integer.toString(boss.getLives()));
+            this.bossLives.setText(Integer.toString(boss.getLives()));
             this.stop();
             bullet.explode();
             bullet.removeBullet(bullet);
