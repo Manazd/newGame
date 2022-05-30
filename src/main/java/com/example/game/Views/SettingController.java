@@ -6,6 +6,7 @@ import com.example.game.Models.GameLevel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
 
 import java.io.IOException;
 
@@ -47,4 +48,5 @@ public class SettingController {
     public void setEasy(ActionEvent actionEvent) {
         UserController.getLoggedInUser().setGameLevel(new GameLevel(1));
     }
+
 }

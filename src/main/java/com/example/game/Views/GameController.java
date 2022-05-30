@@ -3,12 +3,14 @@ package com.example.game.Views;
 import com.example.game.Controllers.*;
 import com.example.game.Main;
 import com.example.game.Models.*;
+import com.example.game.Transition.GameTimer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -29,6 +31,10 @@ import java.util.TimerTask;
 public class GameController implements Initializable {
 
     public AnchorPane pane;
+    @FXML
+    private Text time;
+    @FXML
+    private Button color;
     @FXML
     private Text playerScores;
     @FXML
@@ -152,7 +158,8 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         second = 0;
-
+        GameTimer gameTimer = new GameTimer(time);
+        gameTimer.play();
         Boss.getInstance(pane).getImageView().setVisible(true);
         handleLives();
         if (!musicStop) {
@@ -201,12 +208,16 @@ public class GameController implements Initializable {
         mediaPlayer.play();
     }
 
-    public void createMiniBoss() {
-        for (int i = 0; i < 4; i++) {
-            MiniBoss miniBoss = new MiniBoss(pane, i);
-            MiniBossAnimation miniBossAnimation = new MiniBossAnimation(miniBoss);
-            miniBossAnimation.play();
+    public void changeColor(ActionEvent actionEvent) {
+        ColorAdjust colorAdjust = new ColorAdjust();
+        colorAdjust.setSaturation(-1);
+        if (pane.getEffect() != null) {
+            pane.setEffect(null);
         }
+        else {
+            pane.setEffect(colorAdjust);
+        }
+        pane.requestFocus();
     }
 
     public void setBossLives(String lives) {

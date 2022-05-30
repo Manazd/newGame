@@ -138,7 +138,8 @@ public class ProfilePageController implements Initializable {
         this.imageView.setImage(Boss.getImage());
     }
 
-    public void showAvatars(ActionEvent actionEvent) {
+    public void showAvatars(ActionEvent actionEvent) throws IOException {
+        Main.changeScene("chooseAvatar");
     }
 }
 
