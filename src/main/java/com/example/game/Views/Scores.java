@@ -46,8 +46,6 @@ public class Scores implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sortScores();
-        // TODO number of rows
-//        number.setCellValueFactory(new PropertyValueFactory<>("number"));
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         score.setCellValueFactory(new PropertyValueFactory<>("score"));
         tableView.setItems(getBestUsers());

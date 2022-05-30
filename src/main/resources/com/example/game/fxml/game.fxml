@@ -49,15 +49,25 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="musicOff" layoutX="768.0" mnemonicParsing="false" onAction="#stopMusic" prefHeight="37.0" prefWidth="50.0" style="-fx-background-color: red;" text="Off">
+      <Button fx:id="musicOff" layoutX="768.0" mnemonicParsing="false" onAction="#stopMusicD" prefHeight="37.0" prefWidth="50.0" style="-fx-background-color: red;" text="Off">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="musicOn" layoutX="724.0" mnemonicParsing="false" onAction="#playMusic" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: #16CD00;" text="On">
+      <Button fx:id="musicOn" layoutX="724.0" mnemonicParsing="false" onAction="#playMusicD" prefHeight="21.0" prefWidth="43.0" style="-fx-background-color: #16CD00;" text="On">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
+      <Text layoutX="64.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player score:" textAlignment="CENTER" wrappingWidth="113.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="playerScores" layoutX="172.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="86.5115966796875">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

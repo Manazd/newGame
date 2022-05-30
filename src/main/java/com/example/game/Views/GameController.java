@@ -30,6 +30,8 @@ public class GameController implements Initializable {
 
     public AnchorPane pane;
     @FXML
+    private Text playerScores;
+    @FXML
     private Button musicOff;
     @FXML
     private Button musicOn;
@@ -49,31 +51,43 @@ public class GameController implements Initializable {
     private static MediaPlayer mediaPlayer;
     private static MediaView mediaView;
     private static boolean musicStop;
-    public static int second = 0;
+    private static int second = 0;
+    private static int guestPlayerScore = 0;
+    private static boolean gameOff;
 
-    public static boolean isMusicStop() {
-        return musicStop;
+    public Timer timer = new Timer();
+    public TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            second++;
+        }
+    };
+
+    public static int getSecond() {
+        return second;
     }
 
-    public static void setMusicStop(boolean musicStop) {
-        GameController.musicStop = musicStop;
+    public static void setSecond(int second) {
+        GameController.second = second;
     }
 
+    public static int getGuestPlayerScore() {
+        return guestPlayerScore;
+    }
 
-//    public Timer timer = new Timer();
-//    public TimerTask task = new TimerTask() {
-//        @Override
-//        public void run() {
-//            second++;
-//            System.out.println(second);
-//            if (second % 10 == 0)
-//                createMiniBoss();
-//            timer.cancel();
-//            timer.purge();
-//        }
-//    };
+    public static void setGuestPlayerScore(int guestPlayerScore) {
+        GameController.guestPlayerScore = guestPlayerScore;
+    }
 
-    private void run() {
+    public static boolean isGameOff() {
+        return gameOff;
+    }
+
+    public static void setGameOff(boolean gameOff) {
+        GameController.gameOff = gameOff;
+    }
+
+    private void runGame() {
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
@@ -117,7 +131,6 @@ public class GameController implements Initializable {
     private void bossShoot() {
         pane.getChildren().remove(Boss.getInstance(pane).getImageView());
         Boss.getInstance(pane).shoot(pane);
-//        pane.getChildren().add(Boss.getInstance(pane).getImageView());
     }
 
     private void transformToBomb() {
@@ -129,7 +142,7 @@ public class GameController implements Initializable {
 
     private void shootBullet() {
         Bullet bullet = new Bullet(plane, pane);
-        ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet, pane, bossLives, playerLives);
+        ShootingBulletAnimation shooting = new ShootingBulletAnimation(bullet, pane, bossLives, playerLives, playerScores);
         shooting.play();
         AudioClip shoot = new AudioClip(this.getClass().getResource("/com/example/game/Audio/gunShoot.mp3").toExternalForm());
         shoot.play();
@@ -138,13 +151,15 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        second = 0;
+
         Boss.getInstance(pane).getImageView().setVisible(true);
         handleLives();
         if (!musicStop) {
             handleMusic();
         }
 
-//        timer.scheduleAtFixedRate(task, 1000, 1000);
+        timer.scheduleAtFixedRate(task, 1000, 1000);
 
         BossAnimation bossAnimation = new BossAnimation(Boss.getInstance(pane));
         bossAnimation.play();
@@ -152,11 +167,11 @@ public class GameController implements Initializable {
             @Override
             public void run() {
                 pane.requestFocus();
-                createMiniBoss();
             }
         });
-//        createMiniBoss();
-        run();
+        NewMiniBoss miniBoss = new NewMiniBoss(pane);
+        miniBoss.start();
+        runGame();
         this.levelOfGame = 2;
     }
 
@@ -167,6 +182,8 @@ public class GameController implements Initializable {
         }
         else
             this.playerLives.setText("5");
+        guestPlayerScore = 0;
+        this.playerScores.setText("0");
         Boss.getInstance(pane).setLives(15);
         this.bossLives.setText("15");
     }
@@ -184,7 +201,7 @@ public class GameController implements Initializable {
         mediaPlayer.play();
     }
 
-    private void createMiniBoss() {
+    public void createMiniBoss() {
         for (int i = 0; i < 4; i++) {
             MiniBoss miniBoss = new MiniBoss(pane, i);
             MiniBossAnimation miniBossAnimation = new MiniBossAnimation(miniBoss);
@@ -195,6 +212,10 @@ public class GameController implements Initializable {
     public void setBossLives(String lives) {
         bossLives.setText(null);
         bossLives.setText(lives);
+    }
+
+    public static void setMusicStop(boolean musicStop) {
+        GameController.musicStop = musicStop;
     }
 
     public void pauseGame(ActionEvent actionEvent) throws IOException {
@@ -209,11 +230,12 @@ public class GameController implements Initializable {
         mediaPlayer.play();
     }
 
-    public void stopMusic(ActionEvent actionEvent) {
+    public void stopMusicD(ActionEvent actionEvent) {
         mediaPlayer.stop();
     }
 
-    public void playMusic(ActionEvent actionEvent) {
+    public void playMusicD(ActionEvent actionEvent) {
         mediaPlayer.play();
     }
+
 }

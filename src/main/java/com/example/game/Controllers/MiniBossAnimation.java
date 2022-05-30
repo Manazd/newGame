@@ -9,7 +9,7 @@ public class MiniBossAnimation extends Transition {
 
     public MiniBossAnimation(MiniBoss miniBoss) {
         this.miniBoss = miniBoss;
-        this.setCycleDuration(Duration.millis(1000));
+        this.setCycleDuration(Duration.millis(500));
         this.setCycleCount(-1);
     }
     @Override
@@ -21,8 +21,7 @@ public class MiniBossAnimation extends Transition {
                 miniBoss.setBackground("/com/example/game/img/MiniBossFly/pink/" + frame + ".png");
             else
                 miniBoss.setBackground("/com/example/game/img/MiniBossFly/yellow/" + frame + ".png");
-        }
-        else {
+        } else {
             miniBoss.removeMiniBoss(miniBoss);
         }
     }

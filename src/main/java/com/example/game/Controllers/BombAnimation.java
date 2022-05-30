@@ -28,7 +28,6 @@ public class BombAnimation extends Transition {
         if (bomb.bombHitBoss()) {
             Boss boss = Boss.getInstance(pane);
             boss.setLives(boss.getLives() - 4);
-//            GameController.setBossLives(Integer.toString(boss.getLives()));
             this.stop();
             bomb.explode();
             Bomb.removeBomb(bomb);
@@ -42,9 +41,5 @@ public class BombAnimation extends Transition {
             pane.getChildren().remove(bomb.getImageView());
             Bomb.removeBomb(bomb);
         }
-    }
-
-    private void live() {
-
     }
 }

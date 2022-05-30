@@ -31,6 +31,5 @@ public class BombHitBossAnimation extends Transition {
         int frame = (int) Math.floor(v * 11);
         ImagePattern dust = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/Hit Dust/" + frame + ".png").toExternalForm()));
         bomb.getImageView().setImage(dust.getImage());
-
     }
 }

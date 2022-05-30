@@ -1,11 +1,5 @@
 package com.example.game.Models;
 
-import javafx.scene.image.Image;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Random;
-
 public class User {
     private GameLevel gameLevel;
     private String username;

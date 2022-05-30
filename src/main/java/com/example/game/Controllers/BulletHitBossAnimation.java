@@ -30,15 +30,18 @@ public class BulletHitBossAnimation extends Transition {
     }
 
     @Override protected void interpolate(double v) {
-        FadeTransition fade = new FadeTransition(Duration.millis(1000), Boss.getInstance(pane).getImageView());
-        fade.setFromValue(1.0);
-        fade.setToValue(0.1);
-        fade.setCycleCount(Timeline.INDEFINITE);
-        fade.setAutoReverse(true);
-        fade.play();
-
+        makeFade();
         int frame = (int) Math.floor(v * 6);
         ImagePattern dust = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/Flap Feather Dust/" + frame + ".png").toExternalForm()));
         bullet.getImageView().setImage(dust.getImage());
+    }
+
+    private void makeFade() {
+        FadeTransition fade = new FadeTransition(Duration.millis(1000), Boss.getInstance(pane).getImageView());
+        fade.setFromValue(1.0);
+        fade.setToValue(0.1);
+        fade.setCycleCount(2);
+        fade.setAutoReverse(true);
+        fade.play();
     }
 }

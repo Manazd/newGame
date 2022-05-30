@@ -1,6 +1,5 @@
 package com.example.game.Models;
 
-import com.example.game.Controllers.EggAnimation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,8 +33,6 @@ public class Egg {
     }
 
     public boolean hitSomething() {
-//        System.out.println(this.getImageView().getLayoutY());
-//        System.out.println(this.getImageView().getLayoutY());
         return this.getImageView().getLayoutX() == plane.getLayoutX() + 1
                 && this.getImageView().getLayoutY() == plane.getLayoutY() - 40;
     }

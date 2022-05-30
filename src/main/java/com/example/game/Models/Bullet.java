@@ -65,10 +65,6 @@ public class Bullet {
         return Y;
     }
 
-    public void setLayoutY(double y) {
-        Y = y;
-    }
-
     public ImageView getImageView() {
         return imageView;
     }

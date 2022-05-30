@@ -68,11 +68,9 @@ public class ProfilePageController implements Initializable {
 
         try {
             BufferedImage bufferedImage = ImageIO.read(filePath);
-            //////////////////////////////////////////////////////////////////////////////////////////////////////
 //            ImagePattern Boss = new ImagePattern(new Image(getClass().getResource("/com/example/game/img/avatars/" + UserController.getLoggedInUser().getAvatarNumber() + ".png").toExternalForm()));
 //            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 //            this.imageView.setImage(image);
-            /////////////////////////////////////////////////////////////////////////////////////////////////////
 //            UserController.getLoggedInUser().setAvatar(image);
 //            UserController.getLoggedInUser().setAvatarURL();
         } catch (IOException exception) {

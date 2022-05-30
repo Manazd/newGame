@@ -1,9 +1,6 @@
 package com.example.game.Models;
 
-import com.example.game.Controllers.BombAnimation;
 import com.example.game.Controllers.BombHitBossAnimation;
-import com.example.game.Controllers.BulletHitBossAnimation;
-import com.example.game.Controllers.ShootingBulletAnimation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -52,24 +49,12 @@ public class Bomb {
         return bombs;
     }
 
-    public double getX() {
-        return X;
-    }
-
-    public void setX(double x) {
-        X = x;
-    }
-
     public double getLayoutY() {
         return Y;
     }
 
     public double getLayoutX() {
         return X;
-    }
-
-    public void setY(double y) {
-        Y = y;
     }
 
     public ImageView getImageView() {
@@ -81,7 +66,6 @@ public class Bomb {
     }
 
     public static void removeBomb(Bomb bomb) {
-//        pane.getChildren().remove(bomb.getImageView());
         bombs.remove(bomb);
     }
 
