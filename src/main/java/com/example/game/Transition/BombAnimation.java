@@ -1,15 +1,10 @@
-package com.example.game.Controllers;
+package com.example.game.Transition;
 
 import com.example.game.Models.Bomb;
 import com.example.game.Models.Boss;
-import com.example.game.Views.GameController;
 import javafx.animation.Transition;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-
-import javax.swing.text.PlainDocument;
-import javax.swing.text.html.ImageView;
 
 public class BombAnimation extends Transition {
 

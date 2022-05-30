@@ -3,7 +3,7 @@ package com.example.game.Views;
 import com.example.game.Controllers.*;
 import com.example.game.Main;
 import com.example.game.Models.*;
-import com.example.game.Transition.GameTimer;
+import com.example.game.Transition.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -141,7 +141,7 @@ public class GameController implements Initializable {
 
     private void transformToBomb() {
         pane.getChildren().remove(plane);
-        Bomb bomb = new Bomb(plane, pane);
+        Bomb bomb = new Bomb(plane, pane, bossLives, playerScores);
         BombAnimation bombAnimation = new BombAnimation(bomb, pane);
         bombAnimation.play();
     }

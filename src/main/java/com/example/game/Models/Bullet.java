@@ -1,6 +1,6 @@
 package com.example.game.Models;
 
-import com.example.game.Controllers.BulletHitBossAnimation;
+import com.example.game.Transition.BulletHitBossAnimation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;

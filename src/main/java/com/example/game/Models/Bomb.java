@@ -1,12 +1,13 @@
 package com.example.game.Models;
 
-import com.example.game.Controllers.BombHitBossAnimation;
+import com.example.game.Transition.BombHitBossAnimation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -17,11 +18,15 @@ public class Bomb {
     private double Y;
     private ImageView imageView;
     private static AnchorPane pane;
+    private Text bossLives;
+    private Text playerScores;
 
-    public Bomb(ImageView plane, AnchorPane pane){
+    public Bomb(ImageView plane, AnchorPane pane, Text bossLives, Text playerScores){
         ImageView bombImage = createImageView(pane, plane);
         this.X = bombImage.getLayoutX();
         this.Y = bombImage.getLayoutY();
+        this.bossLives = bossLives;
+        this.playerScores = playerScores;
         imageView = bombImage;
         bombs.add(this);
         setPane(pane);
@@ -76,7 +81,7 @@ public class Bomb {
     }
 
     public void explode() {
-        BombHitBossAnimation animation = new BombHitBossAnimation(this, pane);
+        BombHitBossAnimation animation = new BombHitBossAnimation(this, pane, bossLives, playerScores);
         animation.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

@@ -1,4 +1,4 @@
-package com.example.game.Controllers;
+package com.example.game.Transition;
 
 import com.example.game.Models.Boss;
 import com.example.game.Models.Egg;

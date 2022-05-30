@@ -1,7 +1,7 @@
 package com.example.game.Controllers;
 
 import com.example.game.Models.MiniBoss;
-import com.example.game.Views.GameController;
+import com.example.game.Transition.MiniBossAnimation;
 import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 
