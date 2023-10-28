@@ -1,1 +1,1 @@
-# This is a simulation of the Cuphead game using Java.
+ This is a simulation of the Cuphead game using Java.
